@@ -36,6 +36,11 @@ h2 {
     font-size: 30px;
 }
 
+h3 {
+    font-family: ConsoleFont;
+    font-size: 20px;
+}
+
 p {
     font-family: ConsoleFont;
     font-size: 1.5em;
@@ -83,4 +88,95 @@ a {
     {
         background-position: 500% 0;
     }
+}
+
+.article {
+    text-align: justify;
+}
+
+#dependencies {
+    color: #0a47d5;
+}
+
+#deplist {
+    color:#0a47d5;
+    font-family: ConsoleFont;
+    font-size: 1.5em;
+}
+
+code {
+    color:white;
+    font-size: 1.5em;
+    margin:20px;
+    vertical-align: middle;
+}
+
+#code {
+    width:100%;
+    line-height:2em;
+    background-color:rgb(40, 40, 40);
+}
+
+.info {
+    position: relative;
+    display: inline-block;
+}
+
+.infotext {
+    visibility: hidden;
+    width: 300px;
+    background-color: rgb(23, 23, 23);
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    font-size:17px;
+    position: absolute;
+    z-index: 1;
+}
+
+.info .infotext {
+    top: -5px;
+    left: 105%; 
+}
+
+.info:hover .infotext {
+    opacity: 95%;
+    visibility: visible;
+}
+
+#screenshot {
+    width:100%;
+}
+
+.accordion {
+    font-size:1.5em;
+    font-family:ConsoleFont;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin-bottom:10px;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color:rgb(244, 244, 244);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

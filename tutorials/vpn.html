@@ -18,9 +18,82 @@
 
         <div class="mainpage">
             <div class="article">
-                <h2>Making your own personal VPN</h2>
-                <p>WIP, come back later :)</p>
+                <div class="wrapper">
+                    <h2>Making your own personal VPN</h2>
+                    <p>15 min</p>
+                </div>
+                <button class="accordion">&#128213 Introduction</button>
+                <div class="panel">
+                <p>A Virtual Private Network (VPN) service can be handful in a great amount of different situations, such as hiding your IP adress from others, encrypting your traffic when visiting HTTP websites, or spoofing your location to use services you normally couldn't.</p>
+                <p>I will introduce you to making one; it is an easy and straightforward process. It is also a good way to learn more about Linux systems and networking.</p>
+                </div>
+                <button class="accordion">&#128204 Prerequisites</button>
+                <div class="panel">
+                <p id="dependencies">You will need:</p>
+                <ul id="deplist">
+                    <li>a Linux server (Dedicated, VPS or Raspberry Pi)</li>
+                    <li>some basic Linux knowledge</li>
+                </ul>
+                </div>
+                <button class="accordion">&#128194 Step 1 - Installing PiVPN</button>
+                <div class="panel">
+                <p>First, you'll have to <a class="info">SSH<span class="infotext">Secure SHell is a protocol used to connect to remote servers securely.</span></a> into your server. This can be done by using the following command:</p>
+                <div id="code">
+                    <pre>
+<code>ssh username@ip</code></pre>
+                </div>
+                <p>Once you're connected, you can simply install the PiVPN script with this command:</p>
+                <div id="code">
+<pre><code>curl -L https://install.pivpn.io | bash</code></pre>
+                </div>
+                <p>This will download the script on PiVPN servers and will immediately launch it; this can take some time depending on your server's specs and internet connection. Once the script is launched, you should see this:</p>
+                <img src="../media/screenshots/ksnip_20230122-160316.png" id="screenshot">
+                <p>Continue with default settings (pressing Enter at each step) if you want a default installation. When you arrive at the following step, you will be able to choose what VPN service you prefer installing.</p>
+                <img src="../media/screenshots/ksnip_20230122-160726.png" id="screenshot">
+                <p>I recommend going with <a class="info">WireGuard<span class="infotext">WireGuard is a communication protocol that is free and open-source.</span></a> as it is proven to be easier to use, faster, and safer than the old OpenVPN protocol. Select the one you want and continue.</p>
+                <img src="../media/screenshots/ksnip_20230122-160943.png" id="screenshot">
+                <p>At this step, you can choose to edit the default WireGuard <a class="info">port<span class="infotext">A port is a data connection endpoint. Ports are ranging between 0 and 65535. Most ports below 1024 are used by your system.</span></a>. Do this only if you know what you are doing, as the script automatically selects a non-used port; by changing this value you could make WireGuard use a port along with another process.</p>
+                <img src="../media/screenshots/ksnip_20230122-161249.png" id="screenshot">
+                <p>Here, you can select a custom <a class="info">DNS<span class="infotext">Domain Name System - a naming system that associates IP addresses with domain names.</span></a> provider. It will be able to see every domain you request, so choose wisely. I will go with OpenDNS.</p>
+                <img src="../media/screenshots/ksnip_20230122-163713.png" id="screenshot">
+                <p>On this screen, I recommend using your server's public IP address; to use a public DNS name, you would need a <a class="info">domain name<span class="infotext">A domain name is a string used to identify a service over the Internet, i.e. google.com</span></a>.</p>
+                <img src="../media/screenshots/ksnip_20230122-164541.png" id="screenshot">
+                <p>The script will ask you to enable automatic updates for your system, which is a good choice especially if you host your VPN locally; an open port can be dangerous. After this, finish the installation and reboot your system. Once it is up and running, SSH back in.</p>
+                </div>
+                <button class="accordion">&#128194 Step 2 - Creating a PiVPN profile</button>
+                <div class="panel">
+                    <p>Now that PiVPN is installed, you can type this command to create a profile:</p>
+                    <div id="code">
+                        <pre><code>pivpn add</code></pre>
+                    </div>
+                    <p>You will be asked to enter a name for the profile; it is at your discretion. The name should be tied to the client you will use. I'll name mine XamiPC, as I plan to use the profile on my PC. Note that a profile should only be used on one device.</p>
+                    <img src="../media/screenshots/ksnip_20230122-174733.png" id="screenshot">
+                    <p>Your profile is created! Now there are two options for you to use it:</p>
+                    <h3>&#128241 Android/iPhone</h3>
+                    <p>There is an easy way to use your profile on a phone; first, create a QR code for your profile using the following command:</p>
+                    <div id="code">
+                        <pre><code>pivpn -qr</code></pre>
+                    </div>
+                    <p>One QR code will be generated. On your phone, download the WireGuard client in the Play Store/App Store, scan the QR code, enable the connection, and you're done!</p>
+                    <h3>&#128187 Computer (Windows/MacOS/Linux)</h3>
+                    <p>Now it's a bit trickier here, but overall straightforward. You will have to transfer the configuration file for your profile onto your computer, and then you will be able to use it. To transfer a file using the SSH protocol, we will need this command:</p>
+                    <div id="code">
+                        <pre><code>scp username@ip:file1 username@ip:file2</code></pre>
+                    </div>
+                    <p>It might look weird, but it will be clear once you do it. Open a new terminal and type the command; here's an example with me:</p>
+                    <div id="code">
+                        <pre><code>scp pi@192.168.0.10:/home/pi/configs/XamiPC.conf /home/maxime/</code></pre>
+                    </div>
+                    <p>You will be prompted for the remote user's password. Once the command is done running, the file XamiPC.conf will be transferred to /home/maxime/pivpn on the local machine.</p>
+                </div>
+                <button class="accordion">&#128194 Step 3 - Use your VPN profile configuration file</button>
+                <div class="panel">
+                    <p>Now that the configuration file is on your local machine, you have to install the WireGuard client. Choose your operating system and download it <a href="https://www.wireguard.com/install/" target="_blank">here</a>.</p>
+                    <p>Import the configuration file in the client and you're now connected to your own VPN service!</p>
+                </div>
+                <button class="accordion">&#127881 Congratulations!</button>
             </div>
         </div>
+        <script src="../accordion.js"></script>
     </body>
 </html>
