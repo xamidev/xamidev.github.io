@@ -180,3 +180,32 @@ code {
     align-items: center;
     justify-content: space-between;
 }
+
+.btn {
+    background: rgb(222, 222, 222);
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0px;
+    cursor:pointer;
+    font-family: ConsoleFont;
+    color: #444;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    margin-top: 20px;
+    border:none;
+    transition: 0.4s;
+}
+
+.btn:hover {
+    background: #ccc;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 1026px) {
+    .mainpage {
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 50px;
+    }
+}
