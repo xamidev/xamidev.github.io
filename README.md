@@ -9,6 +9,8 @@ Feel free to report any bugs, or to suggest any ideas.
 - More tutorials for people that want to do small projects
 - Better visual effects, and overall style
 - A better homepage, this one is a bit raw
+- Mobile responsiveness
+- Better links to other pages (those ones are raw)
 
 ### What I learned (for now)
 
