@@ -209,3 +209,8 @@ code {
         margin-top: 50px;
     }
 }
+
+.project {
+    display: block;
+    width:100%;
+}
